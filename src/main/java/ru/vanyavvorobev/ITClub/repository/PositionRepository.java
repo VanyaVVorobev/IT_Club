@@ -7,5 +7,6 @@ import ru.vanyavvorobev.ITClub.entity.position.PositionPrimaryKey;
 import java.util.List;
 
 public interface PositionRepository extends JpaRepository<PositionEntity, PositionPrimaryKey> {
-    public List<PositionEntity> findByUserUuid(String Uuid);
+
+    List<PositionEntity> findAllByUserUuid(String Uuid);
 }

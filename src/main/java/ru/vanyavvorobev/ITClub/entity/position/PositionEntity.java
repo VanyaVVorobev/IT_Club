@@ -3,6 +3,7 @@ package ru.vanyavvorobev.ITClub.entity.position;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.User;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
 
 import javax.persistence.*;
@@ -15,9 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PositionEntity {
-//    @Id
-//    @Column(name = "user_uuid")
-//    private String userUuid;
+
     @Id
     @Column(name = "position_name")
     private String positionName;

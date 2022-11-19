@@ -1,12 +1,12 @@
 package ru.vanyavvorobev.ITClub.service.mapper;
 
 import ru.vanyavvorobev.ITClub.dto.AuthorizationUserDto;
-import ru.vanyavvorobev.ITClub.dto.UserDto;
+import ru.vanyavvorobev.ITClub.dto.UserProfileDto;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
 
 public class UserMapper {
-    public static UserDto mapToDto(UserEntity entity) {
-        var dto = new UserDto();
+    public static UserProfileDto mapToDto(UserEntity entity) {
+        var dto = new UserProfileDto();
         dto.setUuid(entity.getUuid());
         dto.setLogin(entity.getLogin());
         dto.setCourse(entity.getCourse());
@@ -23,7 +23,7 @@ public class UserMapper {
         entity.setLogin(dto.getLogin());
         return entity;
     }
-    public static UserEntity mapToEntity(UserDto dto) {
+    public static UserEntity mapToEntity(UserProfileDto dto) {
         var entity = new UserEntity();
         entity.setPassword(null);
         entity.setLogin(dto.getLogin());

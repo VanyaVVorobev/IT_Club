@@ -6,6 +6,6 @@ import ru.vanyavvorobev.ITClub.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
-    public UserEntity findByUuid(String uuid);
-    public UserEntity findByLogin(String login);
+    UserEntity findByUuid(String uuid);
+    UserEntity findByLogin(String login);
 }

@@ -15,6 +15,7 @@ import java.util.Set;
 public class RoleEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "name", unique = true)

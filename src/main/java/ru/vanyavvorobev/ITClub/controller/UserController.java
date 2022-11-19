@@ -1,9 +1,7 @@
 package ru.vanyavvorobev.ITClub.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.vanyavvorobev.ITClub.dto.AuthorizationUserDto;
-import ru.vanyavvorobev.ITClub.dto.UserDto;
+import ru.vanyavvorobev.ITClub.dto.UserProfileDto;
 import ru.vanyavvorobev.ITClub.service.TokenService;
 import ru.vanyavvorobev.ITClub.service.UserService;
 
@@ -23,17 +21,17 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public List<UserDto> getAllUsers() {
+    public List<UserProfileDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{uuid}")
-    public UserDto getUserByUuid(@PathVariable String uuid) {
+    public UserProfileDto getUserByUuid(@PathVariable String uuid) {
         return userService.getUserByUuid(uuid);
     }
 
     @PutMapping("/update")
-    public void updateUser(@RequestBody UserDto userDto) {}
+    public void updateUser(@RequestBody UserProfileDto userProfileDto) {}
 
     @DeleteMapping("/delete/{uuid}")
     public void deleteUserByUuid(@PathVariable String uuid) {}

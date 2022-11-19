@@ -1,13 +1,10 @@
 package ru.vanyavvorobev.ITClub.service;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.vanyavvorobev.ITClub.dto.AuthorizationUserDto;
-import ru.vanyavvorobev.ITClub.dto.UserDto;
-import ru.vanyavvorobev.ITClub.entity.RoleEntity;
+import ru.vanyavvorobev.ITClub.dto.UserProfileDto;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
 import ru.vanyavvorobev.ITClub.entity.position.PositionEntity;
 import ru.vanyavvorobev.ITClub.repository.PositionRepository;
@@ -29,33 +26,37 @@ public class UserService {
 
     public UserService(UserRepository userRepository,
                        PositionRepository positionRepository,
-                       RoleRepository roleRepository,
-                       PasswordEncoder passwordEncoder) {
+                       RoleRepository roleRepository
+                       //PasswordEncoder passwordEncoder
+    ) {
         this.userRepository = userRepository;
         this.positionRepository = positionRepository;
         this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
+//        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    public List<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(UserMapper::mapToDto).collect(Collectors.toList());
+    public List<UserProfileDto> getAllUsers() {
+        var userList = userRepository.findAll().stream().map(UserMapper::mapToDto).toList();
+        userList.forEach(it -> it.setPositions(getUserPositionsByUuid(it.getUuid())));
+        return userList;
     }
 
 
-    public UserDto getUserByUuid(String uuid) {
+    public UserProfileDto getUserByUuid(String uuid) {
         var user = UserMapper.mapToDto(userRepository.findByUuid(uuid));
-//        user.setPositions(getUserPositionsByUuid(uuid));
+        user.setPositions(getUserPositionsByUuid(uuid));
         return user;
     }
 
-    private UserDto getUserByLogin(String login) {
+    private UserProfileDto getUserByLogin(String login) {
         var user = UserMapper.mapToDto(userRepository.findByUuid(login));
-//        user.setPositions(getUserPositionsByUuid(user.getUuid()));
+        user.setPositions(getUserPositionsByUuid(user.getUuid()));
         return user;
     }
 
     private List<String> getUserPositionsByUuid(String uuid) {
-        return positionRepository.findByUserUuid(uuid)
+        return positionRepository.findAllByUserUuid(uuid)
                 .stream().map(PositionEntity::getPositionName).collect(Collectors.toList());
     }
 
@@ -82,17 +83,17 @@ public class UserService {
         }
     }
 
-    public UserDto loginUser(AuthorizationUserDto authorizationUserDto) {
+    public UserProfileDto loginUser(AuthorizationUserDto authorizationUserDto) {
         UserEntity userEntity = userRepository.findByLogin(authorizationUserDto.getLogin());
         if(userEntity != null) {
             if(passwordEncoder.matches(authorizationUserDto.getPassword(), userEntity.getPassword())) {
                 return UserMapper.mapToDto(userEntity);
             }
         }
-        return new UserDto();
+        return new UserProfileDto();
     }
 
-    private Boolean isValidUserData(UserDto userDto) {
+    private Boolean isValidUserData(UserProfileDto userProfileDto) {
             //todo:: add implementation
         return true;
     }
