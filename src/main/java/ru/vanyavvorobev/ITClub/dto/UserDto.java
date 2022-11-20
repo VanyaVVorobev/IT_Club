@@ -1,25 +1,28 @@
 package ru.vanyavvorobev.ITClub.dto;
 
+import ru.vanyavvorobev.ITClub.entity.RoleEntity;
+
 import java.util.List;
+import java.util.Set;
 
 public class UserDto {
     private String uuid;
+    private String username;
     private String name;
     private String avatarLink;
     private String faculty;
     private Integer course;
     private String description;
-    private List<String> positions;
 
-    public UserDto() {};
-    public UserDto(String uuid, String name, String avatarLink, String faculty, Integer course, String description, List<String> positions) {
+    public UserDto() {}
+    public UserDto(String uuid, String username, String name, String avatarLink, String faculty, Integer course, String description) {
         this.uuid = uuid;
+        this.username = username;
         this.name = name;
         this.avatarLink = avatarLink;
         this.faculty = faculty;
         this.course = course;
         this.description = description;
-        this.positions = positions;
     }
 
     public String getUuid() {
@@ -28,6 +31,14 @@ public class UserDto {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {
@@ -68,13 +79,5 @@ public class UserDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<String> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(List<String> positions) {
-        this.positions = positions;
     }
 }

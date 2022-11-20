@@ -1,11 +1,12 @@
 package ru.vanyavvorobev.ITClub.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "role_table")
-public class RoleEntity {
+public class RoleEntity implements Serializable {
 
     @Id
     @Column(name = "role_id")
@@ -47,4 +48,5 @@ public class RoleEntity {
     public void setUserEntities(Set<UserEntity> userEntities) {
         this.userEntities = userEntities;
     }
+
 }

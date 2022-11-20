@@ -3,11 +3,12 @@ package ru.vanyavvorobev.ITClub.entity;
 import ru.vanyavvorobev.ITClub.entity.MemberOfTeam.MemberOfTeamEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "position_table")
-public class PositionEntity {
+public class PositionEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,4 +47,5 @@ public class PositionEntity {
     public void setMemberOfTeamEntitySet(Set<MemberOfTeamEntity> memberOfTeamEntitySet) {
         this.memberOfTeamEntitySet = memberOfTeamEntitySet;
     }
+
 }

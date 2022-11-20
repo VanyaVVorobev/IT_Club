@@ -3,11 +3,12 @@ package ru.vanyavvorobev.ITClub.entity;
 import ru.vanyavvorobev.ITClub.entity.MemberOfTeam.MemberOfTeamEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "team_table")
-public class TeamEntity {
+public class TeamEntity implements Serializable {
 
     @Id
     @Column(name = "team_uuid")
@@ -59,4 +60,5 @@ public class TeamEntity {
     public void setMembersList(Set<MemberOfTeamEntity> membersList) {
         this.membersList = membersList;
     }
+
 }

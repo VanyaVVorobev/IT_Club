@@ -63,4 +63,5 @@ public class MemberOfTeamEntity implements Serializable {
     public void setTeamEntity(TeamEntity teamEntity) {
         this.teamEntity = teamEntity;
     }
+
 }

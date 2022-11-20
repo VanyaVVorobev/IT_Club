@@ -1,16 +1,16 @@
 package ru.vanyavvorobev.ITClub.entity;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user_table")
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @Id
     @Column(name = "user_uuid")
     private String uuid;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity role;
 
@@ -125,4 +125,5 @@ public class UserEntity {
     public void setUsername(String username) {
         this.username = username;
     }
+
 }

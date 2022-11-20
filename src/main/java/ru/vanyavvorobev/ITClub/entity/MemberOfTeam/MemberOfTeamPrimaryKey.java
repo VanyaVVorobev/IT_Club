@@ -9,4 +9,27 @@ public class MemberOfTeamPrimaryKey implements Serializable {
 
     private UserEntity userEntity;
     private TeamEntity teamEntity;
+
+    public MemberOfTeamPrimaryKey() {}
+    public MemberOfTeamPrimaryKey(UserEntity userEntity, TeamEntity teamEntity) {
+        this.userEntity = userEntity;
+        this.teamEntity = teamEntity;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public TeamEntity getTeamEntity() {
+        return teamEntity;
+    }
+
+    public void setTeamEntity(TeamEntity teamEntity) {
+        this.teamEntity = teamEntity;
+    }
+
 }
