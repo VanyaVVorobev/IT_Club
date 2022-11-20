@@ -1,17 +1,10 @@
 package ru.vanyavvorobev.ITClub.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "role_table")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class RoleEntity {
 
     @Id
@@ -21,7 +14,36 @@ public class RoleEntity {
     @Column(name = "name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST)
     private Set<UserEntity> userEntities;
 
+    public RoleEntity() {}
+    public RoleEntity(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<UserEntity> getUserEntities() {
+        return userEntities;
+    }
+
+    public void setUserEntities(Set<UserEntity> userEntities) {
+        this.userEntities = userEntities;
+    }
 }

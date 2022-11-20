@@ -1,12 +1,10 @@
 package ru.vanyavvorobev.ITClub.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.vanyavvorobev.ITClub.entity.position.PositionEntity;
-import ru.vanyavvorobev.ITClub.entity.position.PositionPrimaryKey;
+import org.springframework.stereotype.Repository;
+import ru.vanyavvorobev.ITClub.entity.PositionEntity;
 
-import java.util.List;
+@Repository
+public interface PositionRepository extends JpaRepository<PositionEntity, String> {
 
-public interface PositionRepository extends JpaRepository<PositionEntity, PositionPrimaryKey> {
-
-    List<PositionEntity> findAllByUserUuid(String Uuid);
 }
