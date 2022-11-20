@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.vanyavvorobev.ITClub.entity.PositionEntity;
 
 @Repository
-public interface PositionRepository extends JpaRepository<PositionEntity, String> {
+public interface PositionRepository extends JpaRepository<PositionEntity, Integer> {
 
 }

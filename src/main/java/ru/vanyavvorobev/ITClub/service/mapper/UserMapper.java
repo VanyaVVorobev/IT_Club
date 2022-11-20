@@ -6,8 +6,6 @@ import ru.vanyavvorobev.ITClub.dto.UserProfileDto;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
 import ru.vanyavvorobev.ITClub.entity.PositionEntity;
 
-import java.util.stream.Collectors;
-
 public class UserMapper {
     public static UserProfileDto mapToUserProfileDto(UserEntity entity) {
         var dto = new UserProfileDto();
@@ -19,7 +17,6 @@ public class UserMapper {
         dto.setFaculty(entity.getFaculty());
         dto.setDescription(entity.getDescription());
         dto.setAvatarLink(entity.getAvatarLink());
-        dto.setPositions(entity.getUserPositions().stream().map(PositionEntity::getPositionName).collect(Collectors.toList()));
 
         return dto;
     }
@@ -32,7 +29,6 @@ public class UserMapper {
         dto.setFaculty(entity.getFaculty());
         dto.setDescription(entity.getDescription());
         dto.setAvatarLink(entity.getAvatarLink());
-        dto.setPositions(entity.getUserPositions().stream().map(PositionEntity::getPositionName).toList());
 
         return dto;
     }
@@ -49,7 +45,6 @@ public class UserMapper {
         entity.setFaculty(null);
         entity.setName(null);
         entity.setRole(null);
-        entity.setUserPositions(null);
 
         return entity;
     }
@@ -64,8 +59,6 @@ public class UserMapper {
         entity.setFaculty(dto.getFaculty());
         entity.setName(dto.getName());
 
-        entity.setUserPositions(dto.getPositions().stream().map(UserMapper::mapToPosition).collect(Collectors.toSet()));
-
         entity.setPassword(null);
         entity.setRole(null);
 
@@ -74,7 +67,7 @@ public class UserMapper {
 
     private static PositionEntity mapToPosition(String name) {
         var entity = new PositionEntity();
-        entity.setPositionName(name);
+        entity.setName(name);
         return entity;
     }
 }

@@ -8,13 +8,14 @@ import java.util.Set;
 public class RoleEntity {
 
     @Id
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "role_name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "role")
     private Set<UserEntity> userEntities;
 
     public RoleEntity() {}

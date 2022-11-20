@@ -1,5 +1,7 @@
 package ru.vanyavvorobev.ITClub.entity;
 
+import ru.vanyavvorobev.ITClub.entity.MemberOfTeam.MemberOfTeamEntity;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -8,38 +10,40 @@ import java.util.Set;
 public class PositionEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "position_id")
     private Integer id;
 
     @Column(name = "position_name")
-    private String positionName;
+    private String name;
 
-    @ManyToMany(mappedBy = "userPositions")
-    private Set<UserEntity> userEntities;
+    @ManyToMany(mappedBy = "memberPositions")
+    private Set<MemberOfTeamEntity> memberOfTeamEntitySet;
 
     public PositionEntity() {}
 
-    public PositionEntity(Integer id, String positionName) {
+    public PositionEntity(Integer id, String name) {
         this.id = id;
-        this.positionName = positionName;
+        this.name = name;
     }
 
     public Integer getId() {return id;}
 
     public void setId(Integer id) {this.id = id;}
 
-    public String getPositionName() {
-        return positionName;
+    public String getName() {
+        return name;
     }
 
-    public void setPositionName(String positionName) {
-        this.positionName = positionName;
+    public void setName(String positionName) {
+        this.name = positionName;
     }
 
-    public void setUserEntities(Set<UserEntity> userEntities) {
-        this.userEntities = userEntities;
+    public Set<MemberOfTeamEntity> getMemberOfTeamEntitySet() {
+        return memberOfTeamEntitySet;
     }
 
-    public Set<UserEntity> getUserEntities() {
-        return userEntities;
+    public void setMemberOfTeamEntitySet(Set<MemberOfTeamEntity> memberOfTeamEntitySet) {
+        this.memberOfTeamEntitySet = memberOfTeamEntitySet;
     }
 }

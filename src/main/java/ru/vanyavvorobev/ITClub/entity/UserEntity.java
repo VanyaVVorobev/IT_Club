@@ -8,40 +8,34 @@ import java.util.Set;
 public class UserEntity {
 
     @Id
-    @Column(name = "uuid")
+    @Column(name = "user_uuid")
     private String uuid;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity role;
 
-    @Column(name = "login", nullable = false, unique = true)
+    @Column(name = "user_login", nullable = false, unique = true)
     private String login;
-    @Column(name = "password", nullable = false)
+    @Column(name = "user_password", nullable = false)
     private String password;
 
-    @Column(name = "name")
+    @Column(name = "user_username", nullable = false, unique = true)
+    private String username;
+    @Column(name = "user_name")
     private String name;
-    @Column(name = "avatar_link")
+    @Column(name = "user_avatar_link")
     private String avatarLink;
-    @Column(name = "faculty")
+    @Column(name = "user_faculty")
     private String faculty;
-    @Column(name = "course")
+    @Column(name = "user_course")
     private Integer course;
-    @Column(name = "description")
+    @Column(name = "user_description")
     private String description;
 
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_position",
-            joinColumns = @JoinColumn(name = "user_uuid"),
-            inverseJoinColumns = @JoinColumn(name = "position_name")
-    )
-    private Set<PositionEntity> userPositions;
-
     public UserEntity() {}
-    public UserEntity(String uuid, RoleEntity role, String login, String password, String name, String avatarLink, String faculty, Integer course, String description) {
+    public UserEntity(String uuid, String username, RoleEntity role, String login, String password, String name, String avatarLink, String faculty, Integer course, String description) {
         this.uuid = uuid;
+        this.username = username;
         this.role = role;
         this.login = login;
         this.password = password;
@@ -124,11 +118,11 @@ public class UserEntity {
         this.description = description;
     }
 
-    public Set<PositionEntity> getUserPositions() {
-        return userPositions;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserPositions(Set<PositionEntity> userPositions) {
-        this.userPositions = userPositions;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

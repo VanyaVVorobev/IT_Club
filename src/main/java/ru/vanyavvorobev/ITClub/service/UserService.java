@@ -36,5 +36,4 @@ public class UserService {
         return userEntitiesList.stream().map(UserMapper::mapToUserDto).toList();
     }
 
-
 }
