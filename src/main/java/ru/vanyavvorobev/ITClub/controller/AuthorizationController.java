@@ -7,10 +7,4 @@ import ru.vanyavvorobev.ITClub.service.UserService;
 @RequestMapping("/auth")
 public class AuthorizationController {
 
-    private final UserService userService;
-
-    public AuthorizationController(UserService userService) {
-        this.userService = userService;
-    }
-
 }

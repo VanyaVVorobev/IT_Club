@@ -6,5 +6,5 @@ import ru.vanyavvorobev.ITClub.entity.RoleEntity;
 
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
-    RoleEntity findByName(String name);
+
 }
