@@ -1,4 +1,6 @@
-package ru.vanyavvorobev.ITClub.entity;
+package ru.vanyavvorobev.ITClub.entity.Role;
+
+import ru.vanyavvorobev.ITClub.entity.Role.RoleNamesEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,14 +15,12 @@ public class RoleEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role_name", unique = true)
-    private String name;
-
-    @OneToMany(mappedBy = "role")
-    private Set<UserEntity> userEntities;
+    private RoleNamesEnum name;
 
     public RoleEntity() {}
-    public RoleEntity(Integer id, String name) {
+    public RoleEntity(Integer id, RoleNamesEnum name) {
         this.id = id;
         this.name = name;
     }
@@ -33,20 +33,12 @@ public class RoleEntity implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public RoleNamesEnum getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleNamesEnum name) {
         this.name = name;
-    }
-
-    public Set<UserEntity> getUserEntities() {
-        return userEntities;
-    }
-
-    public void setUserEntities(Set<UserEntity> userEntities) {
-        this.userEntities = userEntities;
     }
 
 }

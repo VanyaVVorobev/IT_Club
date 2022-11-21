@@ -1,6 +1,6 @@
 package ru.vanyavvorobev.ITClub.entity;
 
-import ru.vanyavvorobev.ITClub.entity.MemberOfTeam.MemberOfTeamEntity;
+import ru.vanyavvorobev.ITClub.entity.memberOfTeam.MemberOfTeamEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;

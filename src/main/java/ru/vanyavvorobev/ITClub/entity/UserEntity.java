@@ -1,7 +1,10 @@
 package ru.vanyavvorobev.ITClub.entity;
 
+import ru.vanyavvorobev.ITClub.entity.Role.RoleEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_table")
@@ -10,9 +13,11 @@ public class UserEntity implements Serializable {
     @Id
     @Column(name = "user_uuid")
     private String uuid;
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private RoleEntity role;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_uuid"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles;
 
     @Column(name = "user_login", nullable = false, unique = true)
     private String login;
@@ -33,10 +38,10 @@ public class UserEntity implements Serializable {
     private String description;
 
     public UserEntity() {}
-    public UserEntity(String uuid, String username, RoleEntity role, String login, String password, String name, String avatarLink, String faculty, Integer course, String description) {
+    public UserEntity(String uuid, String username, Set<RoleEntity> roles, String login, String password, String name, String avatarLink, String faculty, Integer course, String description) {
         this.uuid = uuid;
         this.username = username;
-        this.role = role;
+        this.roles = roles;
         this.login = login;
         this.password = password;
         this.name = name;
@@ -54,12 +59,12 @@ public class UserEntity implements Serializable {
         this.uuid = uuid;
     }
 
-    public RoleEntity getRole() {
-        return role;
+    public Set<RoleEntity> getRole() {
+        return roles;
     }
 
-    public void setRole(RoleEntity role) {
-        this.role = role;
+    public void setRole(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     public String getLogin() {

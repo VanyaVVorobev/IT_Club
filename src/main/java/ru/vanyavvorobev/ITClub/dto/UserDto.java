@@ -1,10 +1,5 @@
 package ru.vanyavvorobev.ITClub.dto;
 
-import ru.vanyavvorobev.ITClub.entity.RoleEntity;
-
-import java.util.List;
-import java.util.Set;
-
 public class UserDto {
     private String uuid;
     private String username;

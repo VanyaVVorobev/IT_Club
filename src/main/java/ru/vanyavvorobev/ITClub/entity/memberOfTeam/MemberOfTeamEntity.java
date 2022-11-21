@@ -1,4 +1,4 @@
-package ru.vanyavvorobev.ITClub.entity.MemberOfTeam;
+package ru.vanyavvorobev.ITClub.entity.memberOfTeam;
 
 import ru.vanyavvorobev.ITClub.entity.PositionEntity;
 import ru.vanyavvorobev.ITClub.entity.TeamEntity;
