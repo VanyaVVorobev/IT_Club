@@ -1,7 +1,7 @@
 package ru.vanyavvorobev.ITClub.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.vanyavvorobev.ITClub.dto.UserDto;
+import ru.vanyavvorobev.ITClub.dto.old.UserResponse;
 import ru.vanyavvorobev.ITClub.service.UserService;
 
 import java.util.List;
@@ -16,8 +16,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    private List<UserDto> getAllUsers() {
-        return userService.getAllUsers();
-    }
+//    @GetMapping("/")
+//    private List<UserResponse> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
 }

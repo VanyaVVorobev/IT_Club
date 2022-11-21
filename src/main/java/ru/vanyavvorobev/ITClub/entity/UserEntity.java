@@ -1,5 +1,6 @@
 package ru.vanyavvorobev.ITClub.entity;
 
+import org.apache.catalina.User;
 import ru.vanyavvorobev.ITClub.entity.Role.RoleEntity;
 
 import javax.persistence.*;
@@ -38,6 +39,13 @@ public class UserEntity implements Serializable {
     private String description;
 
     public UserEntity() {}
+    public UserEntity(String uuid, String username, String login, String password, Set<RoleEntity> roles) {
+        this.uuid = uuid;
+        this.username = username;
+        this.login = login;
+        this.password = password;
+        this.roles = roles;
+    }
     public UserEntity(String uuid, String username, Set<RoleEntity> roles, String login, String password, String name, String avatarLink, String faculty, Integer course, String description) {
         this.uuid = uuid;
         this.username = username;

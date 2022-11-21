@@ -13,11 +13,10 @@ import java.util.Date;
 
 @Component
 public class JwtUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
     @Value("${itclub.app.jwt-secret}")
     private String jwtSecret;
-
     @Value("${itclub.app.jwtExpirationMs}")
     private Integer jwtExpirationMs;
 

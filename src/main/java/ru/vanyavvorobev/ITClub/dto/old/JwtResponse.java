@@ -1,4 +1,4 @@
-package ru.vanyavvorobev.ITClub.dto;
+package ru.vanyavvorobev.ITClub.dto.old;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package ru.vanyavvorobev.ITClub.service.mapper;
+package ru.vanyavvorobev.ITClub.mapper;
 
-import ru.vanyavvorobev.ITClub.dto.UserDto;
+import ru.vanyavvorobev.ITClub.dto.old.UserResponse;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
 
 public class UserMapper {
-    public static UserDto mapToUserDto(UserEntity entity) {
-        var dto = new UserDto();
+    public static UserResponse mapToUserDto(UserEntity entity) {
+        var dto = new UserResponse();
         dto.setUuid(entity.getUuid());
         dto.setUsername(entity.getUsername());
         dto.setName(entity.getName());

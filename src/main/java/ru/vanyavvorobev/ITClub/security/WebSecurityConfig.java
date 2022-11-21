@@ -1,6 +1,5 @@
 package ru.vanyavvorobev.ITClub.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -62,11 +61,14 @@ import ru.vanyavvorobev.ITClub.security.service.UserDetailsServiceImpl;
         jsr250Enabled = true,
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    private final AuthEntryPointJwt unauthorizedHandler;
+
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler) {
+        this.userDetailsService = userDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
+    }
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {

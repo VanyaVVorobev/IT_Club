@@ -1,6 +1,6 @@
-package ru.vanyavvorobev.ITClub.dto;
+package ru.vanyavvorobev.ITClub.dto.old;
 
-public class UserDto {
+public class UserResponse {
     private String uuid;
     private String username;
     private String name;
@@ -9,8 +9,8 @@ public class UserDto {
     private Integer course;
     private String description;
 
-    public UserDto() {}
-    public UserDto(String uuid, String username, String name, String avatarLink, String faculty, Integer course, String description) {
+    public UserResponse() {}
+    public UserResponse(String uuid, String username, String name, String avatarLink, String faculty, Integer course, String description) {
         this.uuid = uuid;
         this.username = username;
         this.name = name;
