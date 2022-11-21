@@ -5,18 +5,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import ru.vanyavvorobev.ITClub.dto.old.MessageResponse;
 import ru.vanyavvorobev.ITClub.dto.request.LoginRequestDto;
 import ru.vanyavvorobev.ITClub.dto.request.SignupRequestDto;
 import ru.vanyavvorobev.ITClub.dto.response.MessageResponseDto;
 import ru.vanyavvorobev.ITClub.dto.response.TokenResponseDto;
-import ru.vanyavvorobev.ITClub.entity.Role.RoleEntity;
-import ru.vanyavvorobev.ITClub.entity.Role.RoleNamesEnum;
-import ru.vanyavvorobev.ITClub.entity.UserEntity;
 import ru.vanyavvorobev.ITClub.security.jwt.JwtUtils;
-import ru.vanyavvorobev.ITClub.security.service.UserDetailsImpl;
 import ru.vanyavvorobev.ITClub.service.AuthorizationService;
 
 import java.util.*;
@@ -42,7 +36,7 @@ public class AuthorizationController {
         if(messageResponses.isEmpty()) {
             try {
                 authorizationService.saveUser(requestDto);
-                return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+                return ResponseEntity.ok(new MessageResponseDto("User registered successfully!"));
             } catch(Exception e) {
                 return ResponseEntity.internalServerError().body("Server Error");
             }

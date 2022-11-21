@@ -1,15 +1,10 @@
 package ru.vanyavvorobev.ITClub.service;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.vanyavvorobev.ITClub.dto.old.UserResponse;
 import ru.vanyavvorobev.ITClub.repository.PositionRepository;
 import ru.vanyavvorobev.ITClub.repository.RoleRepository;
 import ru.vanyavvorobev.ITClub.repository.UserRepository;
-import ru.vanyavvorobev.ITClub.mapper.UserMapper;
-
-import java.util.List;
 
 @Service
 public class UserService {

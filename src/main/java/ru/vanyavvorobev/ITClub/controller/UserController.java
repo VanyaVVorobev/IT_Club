@@ -1,10 +1,7 @@
 package ru.vanyavvorobev.ITClub.controller;
 
 import org.springframework.web.bind.annotation.*;
-import ru.vanyavvorobev.ITClub.dto.old.UserResponse;
 import ru.vanyavvorobev.ITClub.service.UserService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")

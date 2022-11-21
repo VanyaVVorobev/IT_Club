@@ -1,4 +1,4 @@
-package ru.vanyavvorobev.ITClub.dto.old;
+package ru.vanyavvorobev.ITClub.dto;
 
 public class UserResponse {
     private String uuid;

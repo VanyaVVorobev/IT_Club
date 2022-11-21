@@ -1,7 +1,5 @@
 package ru.vanyavvorobev.ITClub.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import ru.vanyavvorobev.ITClub.dto.old.LoginRequest;
 
 public class LoginRequestDto {
 

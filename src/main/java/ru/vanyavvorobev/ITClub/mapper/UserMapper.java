@@ -1,6 +1,6 @@
 package ru.vanyavvorobev.ITClub.mapper;
 
-import ru.vanyavvorobev.ITClub.dto.old.UserResponse;
+import ru.vanyavvorobev.ITClub.dto.UserResponse;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
 
 public class UserMapper {
