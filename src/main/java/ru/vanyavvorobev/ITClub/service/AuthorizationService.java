@@ -30,7 +30,7 @@ public class AuthorizationService {
     public void saveUser(SignupRequestDto requestDto) throws RuntimeException {
         Set<RoleEntity> roles = new HashSet<>();
         RoleEntity userRole = getRoleByName(RoleNamesEnum.ROLE_USER);
-        if(userRole == null) throw new RuntimeException("Role User is not found!");
+        if(userRole == null) { throw new RuntimeException("Role User is not found!"); }
         roles.add(userRole);
         UserEntity user = new UserEntity(
                 UUID.randomUUID().toString(),

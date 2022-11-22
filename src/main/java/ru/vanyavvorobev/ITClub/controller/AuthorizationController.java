@@ -36,9 +36,10 @@ public class AuthorizationController {
         if(messageResponses.isEmpty()) {
             try {
                 authorizationService.saveUser(requestDto);
-                return ResponseEntity.ok(new MessageResponseDto("User registered successfully!"));
+                String token = generateToken(requestDto.getLogin(), requestDto.getPassword());
+                return ResponseEntity.ok(new TokenResponseDto(token));
             } catch(Exception e) {
-                return ResponseEntity.internalServerError().body("Server Error");
+                return ResponseEntity.internalServerError().body("Server Error!");
             }
         }
         else {
@@ -48,10 +49,13 @@ public class AuthorizationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequestDto requestDto) {
+        return ResponseEntity.ok(new TokenResponseDto(generateToken(requestDto.getLogin(), requestDto.getPassword())));
+    }
+
+    private String generateToken(String login, String password) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(requestDto.getLogin(), requestDto.getPassword()));
+                new UsernamePasswordAuthenticationToken(login, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtUtils.generateJwtToken(authentication);
-        return ResponseEntity.ok(new TokenResponseDto(token));
+        return jwtUtils.generateJwtToken(authentication);
     }
 }

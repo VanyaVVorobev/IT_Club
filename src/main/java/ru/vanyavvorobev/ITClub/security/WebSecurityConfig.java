@@ -12,8 +12,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.vanyavvorobev.ITClub.entity.Role.RoleNamesEnum;
 import ru.vanyavvorobev.ITClub.security.jwt.AuthEntryPointJwt;
 import ru.vanyavvorobev.ITClub.security.jwt.AuthTokenFilter;
+import ru.vanyavvorobev.ITClub.security.jwt.JwtUtils;
 import ru.vanyavvorobev.ITClub.security.service.UserDetailsServiceImpl;
 
 //@Configuration
@@ -73,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
+//        return (AuthTokenFilter::new);
     }
 
     @Override
@@ -97,6 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/user/**").hasAuthority(RoleNamesEnum.ROLE_USER.name())
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
 

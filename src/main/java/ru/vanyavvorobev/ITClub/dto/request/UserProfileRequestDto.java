@@ -1,18 +1,16 @@
-package ru.vanyavvorobev.ITClub.dto;
+package ru.vanyavvorobev.ITClub.dto.request;
 
-public class UserResponse {
+public class UserProfileRequestDto {
     private String uuid;
-    private String username;
     private String name;
     private String avatarLink;
     private String faculty;
     private Integer course;
     private String description;
 
-    public UserResponse() {}
-    public UserResponse(String uuid, String username, String name, String avatarLink, String faculty, Integer course, String description) {
+    public UserProfileRequestDto() {}
+    public UserProfileRequestDto(String uuid, String username, String name, String avatarLink, String faculty, Integer course, String description) {
         this.uuid = uuid;
-        this.username = username;
         this.name = name;
         this.avatarLink = avatarLink;
         this.faculty = faculty;
@@ -26,14 +24,6 @@ public class UserResponse {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getName() {
