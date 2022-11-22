@@ -20,7 +20,7 @@ public class MemberOfTeamEntity implements Serializable {
     @JoinColumn(name = "team_uuid", nullable = false)
     private TeamEntity teamEntity;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     @JoinTable(
             name = "member_position",
             joinColumns = {
