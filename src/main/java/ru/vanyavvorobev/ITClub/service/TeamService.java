@@ -7,7 +7,7 @@ import ru.vanyavvorobev.ITClub.dto.request.CreateTeamRequestDto;
 import ru.vanyavvorobev.ITClub.dto.response.TeamResponseDto;
 import ru.vanyavvorobev.ITClub.entity.TeamEntity;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
-import ru.vanyavvorobev.ITClub.entity.memberOfTeam.MemberOfTeamEntity;
+import ru.vanyavvorobev.ITClub.entity.MemberOfTeamEntity;
 import ru.vanyavvorobev.ITClub.mapper.TeamMapper;
 import ru.vanyavvorobev.ITClub.repository.MemberOfTeamRepository;
 import ru.vanyavvorobev.ITClub.repository.TeamRepository;
@@ -15,10 +15,7 @@ import ru.vanyavvorobev.ITClub.repository.UserRepository;
 import ru.vanyavvorobev.ITClub.security.jwt.JwtUtils;
 import ru.vanyavvorobev.ITClub.security.service.UserDetailsServiceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,11 +59,10 @@ public class TeamService {
             team.setOwnerUuid(user.getUuid());
             team.setName(requestDto.getName());
             team.setDescription(requestDto.getDescription());
-
-            var members = new ArrayList<MemberOfTeamEntity>();
-            members.add(new MemberOfTeamEntity(user, team));
-            team.setMembersList(Set.copyOf(members));
             teamRepository.save(team);
+            memberOfTeamRepository.save(new MemberOfTeamEntity(UUID.randomUUID().toString(), user, team));
         }
     }
+
+
 }

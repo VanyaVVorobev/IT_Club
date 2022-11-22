@@ -5,7 +5,7 @@ import ru.vanyavvorobev.ITClub.dto.response.TeamResponseDto;
 import ru.vanyavvorobev.ITClub.entity.PositionEntity;
 import ru.vanyavvorobev.ITClub.entity.TeamEntity;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
-import ru.vanyavvorobev.ITClub.entity.memberOfTeam.MemberOfTeamEntity;
+import ru.vanyavvorobev.ITClub.entity.MemberOfTeamEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;

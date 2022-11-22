@@ -1,8 +1,6 @@
 package ru.vanyavvorobev.ITClub.entity;
 
-import org.apache.catalina.User;
 import ru.vanyavvorobev.ITClub.entity.Role.RoleEntity;
-import ru.vanyavvorobev.ITClub.entity.memberOfTeam.MemberOfTeamEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;

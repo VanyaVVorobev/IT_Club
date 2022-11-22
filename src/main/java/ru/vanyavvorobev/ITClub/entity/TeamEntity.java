@@ -1,7 +1,5 @@
 package ru.vanyavvorobev.ITClub.entity;
 
-import ru.vanyavvorobev.ITClub.entity.memberOfTeam.MemberOfTeamEntity;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -18,7 +16,7 @@ public class TeamEntity implements Serializable {
     @Column(name = "team_description")
     private String description;
 
-    @OneToMany(mappedBy = "teamEntity", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "teamEntity", cascade = CascadeType.PERSIST)
     private Set<MemberOfTeamEntity> membersList;
     private String ownerUuid;
 
