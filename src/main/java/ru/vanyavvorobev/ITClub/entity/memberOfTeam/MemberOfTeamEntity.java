@@ -19,15 +19,9 @@ public class MemberOfTeamEntity implements Serializable {
     private UserEntity userEntity;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "team_uuid", nullable = false)
     private TeamEntity teamEntity;
-
-    public MemberOfTeamEntity() {}
-    public MemberOfTeamEntity(UserEntity userEntity, TeamEntity teamEntity) {
-        this.userEntity = userEntity;
-        this.teamEntity = teamEntity;
-    }
 
     @ManyToMany
     @JoinTable(
@@ -39,6 +33,12 @@ public class MemberOfTeamEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
     private Set<PositionEntity> memberPositions;
+
+    public MemberOfTeamEntity() {}
+    public MemberOfTeamEntity(UserEntity userEntity, TeamEntity teamEntity) {
+        this.userEntity = userEntity;
+        this.teamEntity = teamEntity;
+    }
 
     public UserEntity getUserEntity() {
         return userEntity;

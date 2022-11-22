@@ -18,15 +18,16 @@ public class TeamEntity implements Serializable {
     @Column(name = "team_description")
     private String description;
 
-    @OneToMany(mappedBy = "teamEntity")
+    @OneToMany(mappedBy = "teamEntity", cascade = {CascadeType.PERSIST})
     private Set<MemberOfTeamEntity> membersList;
+    private String ownerUuid;
 
     public TeamEntity() {}
-
-    public TeamEntity(String uuid, String name, String description) {
+    public TeamEntity(String uuid, String name, String description, String ownerUuid) {
         this.uuid = uuid;
         this.name = name;
         this.description = description;
+        this.ownerUuid = ownerUuid;
     }
 
     public String getUuid() {
@@ -61,4 +62,11 @@ public class TeamEntity implements Serializable {
         this.membersList = membersList;
     }
 
+    public String getOwnerUuid() {
+        return ownerUuid;
+    }
+
+    public void setOwnerUuid(String ownerUuid) {
+        this.ownerUuid = ownerUuid;
+    }
 }

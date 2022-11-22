@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import ru.vanyavvorobev.ITClub.dto.request.UserProfileRequestDto;
+import ru.vanyavvorobev.ITClub.security.jwt.JwtUtils;
 import ru.vanyavvorobev.ITClub.service.UserService;
 
 @RestController
@@ -11,8 +12,10 @@ import ru.vanyavvorobev.ITClub.service.UserService;
 public class UserController {
 
     private final UserService userService;
+    private final JwtUtils jwtUtils;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JwtUtils jwtUtils) {
+        this.jwtUtils = jwtUtils;
         this.userService = userService;
     }
 
@@ -28,7 +31,7 @@ public class UserController {
     @GetMapping("/profile")
     private ResponseEntity<?> getUserInfo(@RequestHeader (name="Authorization") String token) {
         try {
-            return ResponseEntity.ok(userService.getUserProfile(parseToken(token)));
+            return ResponseEntity.ok(userService.getUserProfile(jwtUtils.cutTokenPrefix(token)));
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -37,17 +40,10 @@ public class UserController {
     @PutMapping("/profile")
     private ResponseEntity<?> putUserInfo(@RequestBody UserProfileRequestDto requestDto, @RequestHeader (name="Authorization") String token) {
         try {
-            userService.putUserProfile(requestDto, parseToken(token));
+            userService.putUserProfile(requestDto, jwtUtils.cutTokenPrefix(token));
             return ResponseEntity.ok("User profile edit is successful!");
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-    }
-
-    private String parseToken(String token) {
-        if(StringUtils.hasText(token) && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-        }
-        return token;
     }
 }

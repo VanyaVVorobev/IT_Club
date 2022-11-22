@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import ru.vanyavvorobev.ITClub.security.service.UserDetailsImpl;
 import ru.vanyavvorobev.ITClub.security.service.UserDetailsServiceImpl;
 
@@ -51,5 +52,12 @@ public class JwtUtils {
         }
 
         return false;
+    }
+
+    public String cutTokenPrefix(String token) {
+        if(StringUtils.hasText(token) && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+        return token;
     }
 }

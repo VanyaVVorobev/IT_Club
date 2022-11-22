@@ -7,4 +7,5 @@ import ru.vanyavvorobev.ITClub.entity.TeamEntity;
 @Repository
 public interface TeamRepository extends JpaRepository<TeamEntity, String> {
 
+    Boolean existsByName(String name);
 }

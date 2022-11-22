@@ -3,8 +3,10 @@ package ru.vanyavvorobev.ITClub.entity.memberOfTeam;
 import ru.vanyavvorobev.ITClub.entity.TeamEntity;
 import ru.vanyavvorobev.ITClub.entity.UserEntity;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class MemberOfTeamPrimaryKey implements Serializable {
 
     private UserEntity userEntity;
