@@ -17,10 +17,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
-
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        UserEntity userEntity;
+        if(isLoginByUsername(login)) {
+             userEntity = userRepository.findByUsername(login)
+                    .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + login));
+        } else {
+            userEntity = userRepository.findByLogin(login)
+                    .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + login));
+        }
         return UserDetailsImpl.build(userEntity);
     }
+
+    public static Boolean isLoginByUsername(String login) {
+        return !isLoginByEmail(login);
+    }
+
+    public static Boolean isLoginByEmail(String login) {
+        return login.contains("@");
+    }
+
 }

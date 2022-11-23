@@ -1,6 +1,5 @@
 package ru.vanyavvorobev.ITClub.security.service;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,16 +11,11 @@ import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private String id;
-
-    private String username;
-
-    private String login;
-
-    @JsonIgnore
-    private String password;
-
-    private Collection<? extends GrantedAuthority> authorities;
+    private final String id;
+    private final String username;
+    private final String login;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(String id, String username, String login, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -45,12 +39,17 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     public String getId() {
@@ -59,11 +58,6 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getLogin() {
         return login;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override

@@ -1,31 +1,22 @@
-package ru.vanyavvorobev.ITClub.entity;
+package ru.vanyavvorobev.ITClub.dto.response;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
-@Entity
-@Table(name = "team_table")
-public class TeamEntity implements Serializable {
+public class TeamResponseDto {
 
-    @Id
-    @Column(name = "team_uuid")
     private String uuid;
-    @Column(name = "team_name", nullable = false,unique = true)
     private String name;
-    @Column(name = "team_description")
     private String description;
-
-    @OneToMany(mappedBy = "teamEntity", cascade = CascadeType.PERSIST)
-    private Set<MemberOfTeamEntity> membersList;
     private String ownerUuid;
+    private List<MemberOfTeamResponseDto> members;
 
-    public TeamEntity() {}
-    public TeamEntity(String uuid, String name, String description, String ownerUuid) {
+    public TeamResponseDto() {}
+    public TeamResponseDto(String uuid, String name, String description, String ownerUuid, List<MemberOfTeamResponseDto> members) {
         this.uuid = uuid;
         this.name = name;
         this.description = description;
         this.ownerUuid = ownerUuid;
+        this.members = members;
     }
 
     public String getUuid() {
@@ -52,19 +43,19 @@ public class TeamEntity implements Serializable {
         this.description = description;
     }
 
-    public Set<MemberOfTeamEntity> getMembersList() {
-        return membersList;
-    }
-
-    public void setMembersList(Set<MemberOfTeamEntity> membersList) {
-        this.membersList = membersList;
-    }
-
     public String getOwnerUuid() {
         return ownerUuid;
     }
 
     public void setOwnerUuid(String ownerUuid) {
         this.ownerUuid = ownerUuid;
+    }
+
+    public List<MemberOfTeamResponseDto> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<MemberOfTeamResponseDto> members) {
+        this.members = members;
     }
 }

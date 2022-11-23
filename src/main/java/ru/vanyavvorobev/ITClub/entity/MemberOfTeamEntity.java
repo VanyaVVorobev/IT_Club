@@ -1,8 +1,4 @@
-package ru.vanyavvorobev.ITClub.entity.memberOfTeam;
-
-import ru.vanyavvorobev.ITClub.entity.PositionEntity;
-import ru.vanyavvorobev.ITClub.entity.TeamEntity;
-import ru.vanyavvorobev.ITClub.entity.UserEntity;
+package ru.vanyavvorobev.ITClub.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,42 +6,31 @@ import java.util.Set;
 
 @Entity
 @Table(name = "member_of_team_table")
-@IdClass(MemberOfTeamPrimaryKey.class)
 public class MemberOfTeamEntity implements Serializable {
 
     @Id
+    @Column(name = "member_uuid")
+    private String uuid;
+
     @ManyToOne
     @JoinColumn(name = "user_uuid", nullable = false)
     private UserEntity userEntity;
 
-    @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "team_uuid", nullable = false)
     private TeamEntity teamEntity;
 
-    public MemberOfTeamEntity() {}
-    public MemberOfTeamEntity(UserEntity userEntity, TeamEntity teamEntity) {
-        this.userEntity = userEntity;
-        this.teamEntity = teamEntity;
-    }
-
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     @JoinTable(
             name = "member_position",
             joinColumns = {
-                    @JoinColumn(name = "team_uuid"),
-                    @JoinColumn(name = "user_uuid")
+                    @JoinColumn(name = "member_uuid"),
             },
             inverseJoinColumns = @JoinColumn(name = "position_id")
     )
     private Set<PositionEntity> memberPositions;
 
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public MemberOfTeamEntity() {
     }
 
     public Set<PositionEntity> getMemberPositions() {
@@ -56,6 +41,33 @@ public class MemberOfTeamEntity implements Serializable {
         this.memberPositions = memberPositions;
     }
 
+    public MemberOfTeamEntity(String uuid, UserEntity userEntity) {
+        this.uuid = uuid;
+        this.userEntity = userEntity;
+    }
+
+    public MemberOfTeamEntity(String uuid, UserEntity userEntity, TeamEntity teamEntity) {
+        this.uuid = uuid;
+        this.userEntity = userEntity;
+        this.teamEntity = teamEntity;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String primaryKey) {
+        this.uuid = primaryKey;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
     public TeamEntity getTeamEntity() {
         return teamEntity;
     }
@@ -63,5 +75,4 @@ public class MemberOfTeamEntity implements Serializable {
     public void setTeamEntity(TeamEntity teamEntity) {
         this.teamEntity = teamEntity;
     }
-
 }

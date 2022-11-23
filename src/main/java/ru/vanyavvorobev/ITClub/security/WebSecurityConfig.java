@@ -1,6 +1,5 @@
 package ru.vanyavvorobev.ITClub.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,8 +12,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.vanyavvorobev.ITClub.entity.Role.RoleNamesEnum;
 import ru.vanyavvorobev.ITClub.security.jwt.AuthEntryPointJwt;
 import ru.vanyavvorobev.ITClub.security.jwt.AuthTokenFilter;
+import ru.vanyavvorobev.ITClub.security.jwt.JwtUtils;
 import ru.vanyavvorobev.ITClub.security.service.UserDetailsServiceImpl;
 
 //@Configuration
@@ -62,15 +63,19 @@ import ru.vanyavvorobev.ITClub.security.service.UserDetailsServiceImpl;
         jsr250Enabled = true,
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    private final AuthEntryPointJwt unauthorizedHandler;
+
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler) {
+        this.userDetailsService = userDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
+    }
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
+//        return (AuthTokenFilter::new);
     }
 
     @Override
@@ -95,6 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/user/**").hasAuthority(RoleNamesEnum.ROLE_USER.name())
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
 

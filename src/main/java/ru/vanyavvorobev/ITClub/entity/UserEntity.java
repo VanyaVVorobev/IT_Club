@@ -13,7 +13,7 @@ public class UserEntity implements Serializable {
     @Id
     @Column(name = "user_uuid")
     private String uuid;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_uuid"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -37,8 +37,18 @@ public class UserEntity implements Serializable {
     @Column(name = "user_description")
     private String description;
 
+    @OneToMany(mappedBy = "userEntity")
+    private Set<MemberOfTeamEntity> memberOfTeamEntitySet;
+
     public UserEntity() {}
-    public UserEntity(String uuid, String username, Set<RoleEntity> roles, String login, String password, String name, String avatarLink, String faculty, Integer course, String description) {
+    public UserEntity(String uuid, String username, String login, String password, Set<RoleEntity> roles) {
+        this.uuid = uuid;
+        this.username = username;
+        this.login = login;
+        this.password = password;
+        this.roles = roles;
+    }
+    public UserEntity(String uuid, Set<MemberOfTeamEntity> memberOfTeamEntitySet, String username, Set<RoleEntity> roles, String login, String password, String name, String avatarLink, String faculty, Integer course, String description) {
         this.uuid = uuid;
         this.username = username;
         this.roles = roles;
@@ -49,6 +59,7 @@ public class UserEntity implements Serializable {
         this.faculty = faculty;
         this.course = course;
         this.description = description;
+        this.memberOfTeamEntitySet = memberOfTeamEntitySet;
     }
 
     public String getUuid() {
@@ -131,4 +142,11 @@ public class UserEntity implements Serializable {
         this.username = username;
     }
 
+    public Set<MemberOfTeamEntity> getMemberOfTeamEntitySet() {
+        return memberOfTeamEntitySet;
+    }
+
+    public void setMemberOfTeamEntitySet(Set<MemberOfTeamEntity> memberOfTeamEntitySet) {
+        this.memberOfTeamEntitySet = memberOfTeamEntitySet;
+    }
 }
