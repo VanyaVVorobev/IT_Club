@@ -37,9 +37,10 @@ public class AuthorizationController {
             try {
                 authorizationService.saveUser(requestDto);
                 String token = generateToken(requestDto.getLogin(), requestDto.getPassword());
-                return ResponseEntity.ok(new TokenResponseDto(token));
+                var response = new TokenResponseDto(token);
+                return ResponseEntity.ok(response);
             } catch(Exception e) {
-                return ResponseEntity.internalServerError().body("Server Error!");
+                return ResponseEntity.internalServerError().body(e.getMessage());
             }
         }
         else {

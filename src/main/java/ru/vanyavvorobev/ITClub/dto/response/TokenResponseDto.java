@@ -2,7 +2,7 @@ package ru.vanyavvorobev.ITClub.dto.response;
 
 public class TokenResponseDto {
 
-    private final String tokenType = "Bearer";
+    private final String tokenType = "Bearer ";
     private String token;
 
     public TokenResponseDto() {}

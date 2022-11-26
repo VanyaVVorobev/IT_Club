@@ -67,6 +67,9 @@ public class TeamService {
             teamRepository.save(team);
             memberOfTeamRepository.save(new MemberOfTeamEntity(UUID.randomUUID().toString(), user, team));
         }
+        else {
+            throw new RequestRejectedException("User is already have a team!");
+        }
     }
 
     public void followUserToTeam(String token, String teamUuid)throws RequestRejectedException {

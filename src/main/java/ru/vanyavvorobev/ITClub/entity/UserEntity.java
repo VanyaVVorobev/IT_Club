@@ -13,7 +13,7 @@ public class UserEntity implements Serializable {
     @Id
     @Column(name = "user_uuid")
     private String uuid;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_uuid"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

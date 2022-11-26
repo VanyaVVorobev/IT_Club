@@ -7,6 +7,7 @@ import ru.vanyavvorobev.ITClub.dto.request.UserProfileRequestDto;
 import ru.vanyavvorobev.ITClub.security.jwt.JwtUtils;
 import ru.vanyavvorobev.ITClub.service.UserService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
